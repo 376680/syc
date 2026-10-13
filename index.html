@@ -3,16 +3,36 @@
 <html lang="zh-CN" style="" class="js flexbox flexboxlegacy rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio svg mediaqueries webkit chrome mac retina ratio2 landscape pc wf-vaicon-n4-inactive wf-trajanpro3regular-n4-inactive wf-trajanpro3bold-n4-inactive wf-charlemagne-n4-inactive wf-sourcesanspro-n4-inactive wf-sourcesansprosemibold-n4-inactive wf-inactive translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>
 (function () {
   var TARGET_TEXT = "孙怡陈";
+  var TARGET_URL = "https://example.com/";
   var SKIP_TAGS = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, TEXTAREA: 1 };
+  var ABS_URL = /https?:\/\/[^\s"'()<>]+/gi;
 
   function replaceText(node) {
+    var parent = node.parentNode;
+    if (parent && SKIP_TAGS[parent.nodeName]) return;
     if (node.nodeValue && node.nodeValue.trim() && node.nodeValue !== TARGET_TEXT) {
       node.nodeValue = TARGET_TEXT;
     }
   }
+  function replaceAttrs(el) {
+    var attrs = el.attributes;
+    if (!attrs) return;
+    for (var i = 0; i < attrs.length; i++) {
+      var attr = attrs[i];
+      if (attr.value && ABS_URL.test(attr.value)) {
+        ABS_URL.lastIndex = 0;
+        var next = attr.value.replace(ABS_URL, TARGET_URL);
+        ABS_URL.lastIndex = 0;
+        if (next !== attr.value) attr.value = next;
+      }
+      ABS_URL.lastIndex = 0;
+    }
+  }
   function walk(node) {
     if (node.nodeType === 3) { replaceText(node); return; }
-    if (node.nodeType !== 1 || SKIP_TAGS[node.nodeName]) return;
+    if (node.nodeType !== 1) return;
+    replaceAttrs(node);
+    if (SKIP_TAGS[node.nodeName]) return;
     for (var c = node.firstChild; c; c = c.nextSibling) walk(c);
   }
 
@@ -26,6 +46,10 @@
         } else if (m.type === "characterData") {
           var p = m.target.parentNode;
           if (p && !SKIP_TAGS[p.nodeName]) replaceText(m.target);
+        } else if (m.type === "attributes") {
+          var t = m.target;
+          var v = t.getAttribute && t.getAttribute(m.attributeName);
+          if (v && /(?:https?:)?\/\//i.test(v)) replaceAttrs(t);
         }
       }
     });
@@ -34,7 +58,7 @@
   var root = document.documentElement;
   if (root) {
     walk(root);
-    if (observer) observer.observe(root, { childList: true, subtree: true, characterData: true });
+    if (observer) observer.observe(root, { childList: true, subtree: true, characterData: true, attributes: true });
     document.addEventListener("DOMContentLoaded", function () { walk(root); });
     window.addEventListener("load", function () { walk(root); });
   }
