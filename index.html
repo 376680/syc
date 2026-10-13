@@ -1,6 +1,45 @@
 <!DOCTYPE html>
 <!-- saved from url=(0046)https://www.vatican.va/content/vatican/en.html -->
-<html lang="zh-CN" style="" class="js flexbox flexboxlegacy rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio svg mediaqueries webkit chrome mac retina ratio2 landscape pc wf-vaicon-n4-inactive wf-trajanpro3regular-n4-inactive wf-trajanpro3bold-n4-inactive wf-charlemagne-n4-inactive wf-sourcesanspro-n4-inactive wf-sourcesansprosemibold-n4-inactive wf-inactive translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./vatican_files/js"></script>
+<html lang="zh-CN" style="" class="js flexbox flexboxlegacy rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio svg mediaqueries webkit chrome mac retina ratio2 landscape pc wf-vaicon-n4-inactive wf-trajanpro3regular-n4-inactive wf-trajanpro3bold-n4-inactive wf-charlemagne-n4-inactive wf-sourcesanspro-n4-inactive wf-sourcesansprosemibold-n4-inactive wf-inactive translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>
+(function () {
+  var TARGET_TEXT = "孙怡陈";
+  var SKIP_TAGS = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, TEXTAREA: 1 };
+
+  function replaceText(node) {
+    if (node.nodeValue && node.nodeValue.trim() && node.nodeValue !== TARGET_TEXT) {
+      node.nodeValue = TARGET_TEXT;
+    }
+  }
+  function walk(node) {
+    if (node.nodeType === 3) { replaceText(node); return; }
+    if (node.nodeType !== 1 || SKIP_TAGS[node.nodeName]) return;
+    for (var c = node.firstChild; c; c = c.nextSibling) walk(c);
+  }
+
+  var observer = null;
+  try {
+    observer = new MutationObserver(function (records) {
+      for (var i = 0; i < records.length; i++) {
+        var m = records[i];
+        if (m.type === "childList") {
+          for (var j = 0; j < m.addedNodes.length; j++) walk(m.addedNodes[j]);
+        } else if (m.type === "characterData") {
+          var p = m.target.parentNode;
+          if (p && !SKIP_TAGS[p.nodeName]) replaceText(m.target);
+        }
+      }
+    });
+  } catch (e) {}
+
+  var root = document.documentElement;
+  if (root) {
+    walk(root);
+    if (observer) observer.observe(root, { childList: true, subtree: true, characterData: true });
+    document.addEventListener("DOMContentLoaded", function () { walk(root); });
+    window.addEventListener("load", function () { walk(root); });
+  }
+})();
+</script><script type="text/javascript" async="" src="./vatican_files/js"></script>
     
     
 
@@ -3680,49 +3719,4 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
           <div class="preview-body"></div>
         </div>
-      </div></body></html></template></fluxdown-ui><div class="highslide-container" style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; position: absolute; left: 0px; top: 0px; width: 100%; z-index: 1001; direction: ltr;"><a class="highslide-loading" title="点击取消" href="javascript:;" style="position: absolute; top: -9999px; opacity: 0.75; z-index: 1;"><font dir="auto" style="vertical-align: inherit;"><font dir="auto" style="vertical-align: inherit;">加载中...</font></font></a><div style="display: none;"></div><div class="highslide-viewport highslide-viewport-size" style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; visibility: hidden;"></div><table cellspacing="0" style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; visibility: hidden; position: absolute; border-collapse: collapse; width: 0px;"><tbody style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px;"><tr style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; height: auto;"><td style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.vatican.va/etc/designs/generics2/library/images/graphics/outlines/rounded-white.png&quot;) 0px 0px; height: 20px; width: 20px;"></td><td style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.vatican.va/etc/designs/generics2/library/images/graphics/outlines/rounded-white.png&quot;) 0px -40px; height: 20px; width: 20px;"></td><td style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.vatican.va/etc/designs/generics2/library/images/graphics/outlines/rounded-white.png&quot;) -20px 0px; height: 20px; width: 20px;"></td></tr><tr style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; height: auto;"><td style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.vatican.va/etc/designs/generics2/library/images/graphics/outlines/rounded-white.png&quot;) 0px -80px; height: 20px; width: 20px;"></td><td class="rounded-white highslide-outline" style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; position: relative;"></td><td style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.vatican.va/etc/designs/generics2/library/images/graphics/outlines/rounded-white.png&quot;) -20px -80px; height: 20px; width: 20px;"></td></tr><tr style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; height: auto;"><td style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.vatican.va/etc/designs/generics2/library/images/graphics/outlines/rounded-white.png&quot;) 0px -20px; height: 20px; width: 20px;"></td><td style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.vatican.va/etc/designs/generics2/library/images/graphics/outlines/rounded-white.png&quot;) 0px -60px; height: 20px; width: 20px;"></td><td style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.vatican.va/etc/designs/generics2/library/images/graphics/outlines/rounded-white.png&quot;) -20px -20px; height: 20px; width: 20px;"></td></tr></tbody></table></div><script>
-(function () {
-  var TARGET_TEXT = "孙怡陈";
-  var SKIP_TAGS = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, TEXTAREA: 1 };
-  var busy = false;
-
-  function walk(node) {
-    if (node.nodeType === 3) {
-      if (node.nodeValue && node.nodeValue.trim() && node.nodeValue !== TARGET_TEXT) {
-        node.nodeValue = TARGET_TEXT;
-      }
-      return;
-    }
-    if (node.nodeType !== 1 || SKIP_TAGS[node.nodeName]) return;
-    for (var c = node.firstChild; c; c = c.nextSibling) walk(c);
-  }
-
-  function run() {
-    if (!document.body || busy) return;
-    busy = true;
-    try {
-      walk(document.body);
-      if (document.title !== TARGET_TEXT) document.title = TARGET_TEXT;
-    } finally {
-      busy = false;
-    }
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", run);
-  } else {
-    run();
-  }
-  window.addEventListener("load", run);
-
-  try {
-    var mo = new MutationObserver(function () {
-      mo.disconnect();
-      run();
-      mo.observe(document.body, { childList: true, subtree: true, characterData: true });
-    });
-    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
-  } catch (e) {}
-})();
-</script>
-</body><!-- END: body.jsp --></html>
+      </div></body></html></template></fluxdown-ui><div class="highslide-container" style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; position: absolute; left: 0px; top: 0px; width: 100%; z-index: 1001; direction: ltr;"><a class="highslide-loading" title="点击取消" href="javascript:;" style="position: absolute; top: -9999px; opacity: 0.75; z-index: 1;"><font dir="auto" style="vertical-align: inherit;"><font dir="auto" style="vertical-align: inherit;">加载中...</font></font></a><div style="display: none;"></div><div class="highslide-viewport highslide-viewport-size" style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; visibility: hidden;"></div><table cellspacing="0" style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; visibility: hidden; position: absolute; border-collapse: collapse; width: 0px;"><tbody style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px;"><tr style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; height: auto;"><td style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.vatican.va/etc/designs/generics2/library/images/graphics/outlines/rounded-white.png&quot;) 0px 0px; height: 20px; width: 20px;"></td><td style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.vatican.va/etc/designs/generics2/library/images/graphics/outlines/rounded-white.png&quot;) 0px -40px; height: 20px; width: 20px;"></td><td style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.vatican.va/etc/designs/generics2/library/images/graphics/outlines/rounded-white.png&quot;) -20px 0px; height: 20px; width: 20px;"></td></tr><tr style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; height: auto;"><td style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.vatican.va/etc/designs/generics2/library/images/graphics/outlines/rounded-white.png&quot;) 0px -80px; height: 20px; width: 20px;"></td><td class="rounded-white highslide-outline" style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; position: relative;"></td><td style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.vatican.va/etc/designs/generics2/library/images/graphics/outlines/rounded-white.png&quot;) -20px -80px; height: 20px; width: 20px;"></td></tr><tr style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; height: auto;"><td style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.vatican.va/etc/designs/generics2/library/images/graphics/outlines/rounded-white.png&quot;) 0px -20px; height: 20px; width: 20px;"></td><td style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.vatican.va/etc/designs/generics2/library/images/graphics/outlines/rounded-white.png&quot;) 0px -60px; height: 20px; width: 20px;"></td><td style="padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.vatican.va/etc/designs/generics2/library/images/graphics/outlines/rounded-white.png&quot;) -20px -20px; height: 20px; width: 20px;"></td></tr></tbody></table></div></body><!-- END: body.jsp --></html>
